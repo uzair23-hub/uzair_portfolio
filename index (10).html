@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Muhammad Uzair Arshad — Full Stack Web Developer from Karachi, Pakistan. Specializing in ASP.NET MVC, C#, JavaScript, and modern frontend technologies." />
+<title>Muhammad Uzair Arshad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --border: #30363d;
+    --accent: #58a6ff;
+    --accent2: #7ee787;
+    --accent3: #f78166;
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --text3: #c9d1d9;
+    --purple: #bc8cff;
+    --yellow: #e3b341;
+    --font-mono: 'Fira Code', monospace;
+    --font-sans: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(1.5rem,5vw,4rem);
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--accent2);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+  }
+  .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text2);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a span { color: var(--accent3); margin-right: 2px; }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 clamp(1.5rem,5vw,3rem); }
+
+  section { padding: 90px 0 60px; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 60px;
+  }
+  .hero-inner { width: 100%; }
+
+  .hero-greeting {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--accent2);
+    margin-bottom: 1rem;
+  }
+  .hero-greeting::before { content: '> '; color: var(--text2); }
+
+  .hero-name {
+    font-size: clamp(2.4rem, 7vw, 4.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.6rem;
+    background: linear-gradient(135deg, var(--text) 60%, var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-title {
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 3vw, 1.35rem);
+    color: var(--accent);
+    margin-bottom: 1.8rem;
+  }
+  .hero-title::before { content: '// '; color: var(--text2); }
+
+  .hero-desc {
+    max-width: 560px;
+    color: var(--text2);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.55rem 1.3rem;
+    border-radius: 6px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all .2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+  .btn-primary:hover { background: #79baff; }
+  .btn-outline { color: var(--text2); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; flex-wrap: wrap;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-size: 2rem; font-weight: 700;
+    color: var(--accent2);
+    font-family: var(--font-mono);
+    display: block;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--text2); }
+
+  /* ── SECTION HEADINGS ── */
+  .section-head {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--accent);
+    margin-bottom: 2.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-head::before { content: '> '; color: var(--text2); }
+  .section-head::after {
+    content: '';
+    display: block; flex: 1;
+    height: 1px; background: var(--border);
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .skill-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.4rem 1.5rem;
+    transition: border-color .2s, transform .2s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .skill-card-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent3);
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text3);
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex; flex-direction: column;
+    transition: border-color .2s, transform .2s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0; transition: opacity .2s;
+  }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .project-card:hover::before { opacity: 1; }
+
+  .project-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .project-name {
+    font-weight: 600; font-size: 1rem;
+    margin-bottom: 0.6rem; color: var(--text);
+  }
+  .project-desc { font-size: 0.85rem; color: var(--text2); flex: 1; margin-bottom: 1.2rem; line-height: 1.6; }
+  .project-bullets { margin-bottom: 1rem; padding-left: 0; list-style: none; }
+  .project-bullets li {
+    font-size: 0.78rem; color: var(--text2);
+    padding: 2px 0;
+    display: flex; gap: 0.5rem; align-items: flex-start;
+  }
+  .project-bullets li::before { content: '→'; color: var(--accent2); flex-shrink: 0; margin-top: 1px; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stack-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    background: rgba(88,166,255,0.08);
+    border: 1px solid rgba(88,166,255,0.25);
+    border-radius: 20px;
+    color: var(--accent);
+  }
+
+  .gh-link {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text2);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.35rem 0.8rem;
+    transition: all .2s;
+  }
+  .gh-link svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+  .gh-link:hover { color: var(--accent2); border-color: var(--accent2); background: rgba(126,231,135,0.06); }
+
+  /* ── CERTS ── */
+  .certs-list { display: flex; flex-direction: column; gap: 0.8rem; }
+  .cert-item {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.3rem;
+    transition: border-color .2s;
+  }
+  .cert-item:hover { border-color: var(--accent2); }
+  .cert-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent2);
+    flex-shrink: 0;
+  }
+  .cert-name { font-weight: 500; font-size: 0.9rem; color: var(--text); }
+  .cert-issuer {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text2);
+    margin-top: 2px;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-items { display: flex; flex-direction: column; gap: 1rem; }
+  .edu-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--purple);
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    transition: border-color .2s;
+  }
+  .edu-card:hover { border-color: var(--purple); }
+  .edu-degree { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .edu-school { font-size: 0.82rem; color: var(--text2); }
+  .edu-year {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent3);
+    margin-top: 0.4rem;
+  }
+
+  /* ── CONTACT ── */
+  .contact-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+  }
+  .contact-wrap p { color: var(--text2); max-width: 480px; margin: 0 auto 2rem; font-size: 0.9rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text2);
+  }
+  footer span { color: var(--accent3); }
+  .footer-socials {
+    display: flex; justify-content: center; gap: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .footer-socials a {
+    color: var(--text2);
+    transition: color .2s, transform .2s;
+    display: flex; align-items: center;
+  }
+  .footer-socials a:hover { color: var(--accent); transform: translateY(-2px); }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--text2);
+    border-radius: 2px;
+    transition: all .3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── MOBILE MENU DRAWER ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px; left: 0; right: 0;
+    background: rgba(13,17,23,0.98);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    z-index: 99;
+    flex-direction: column;
+    gap: 0;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text2);
+    text-decoration: none;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: color .2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a span { color: var(--accent3); }
+  .mobile-menu a:hover { color: var(--accent); }
+
+  /* ── RESPONSIVE BREAKPOINTS ── */
+
+  /* Tablet: 601px – 900px */
+  @media (max-width: 900px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .hero-name { font-size: clamp(2rem, 6vw, 3.2rem); }
+  }
+
+  /* Mobile: ≤ 600px */
+  @media (max-width: 600px) {
+    /* Nav */
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    /* Hero */
+    #hero { padding-top: 60px; min-height: 100svh; }
+    .hero-name { font-size: clamp(1.9rem, 9vw, 2.6rem); line-height: 1.15; }
+    .hero-title { font-size: 0.9rem; }
+    .hero-desc { font-size: 0.88rem; }
+    .hero-links { flex-direction: column; align-items: flex-start; }
+    .btn { width: 100%; justify-content: center; padding: 0.7rem 1rem; font-size: 0.78rem; }
+    .hero-stats { gap: 1.2rem; }
+    .stat-num { font-size: 1.6rem; }
+
+    /* Grids → single column */
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+
+    /* Sections */
+    section { padding: 70px 0 40px; }
+    .section-head { font-size: 0.9rem; }
+
+    /* Contact */
+    .contact-wrap { padding: 1.5rem 1.2rem; }
+    .contact-links { flex-direction: column; align-items: stretch; }
+    .contact-links .btn { width: 100%; justify-content: center; }
+
+    /* Footer */
+    footer { padding: 1.5rem 0; font-size: 0.7rem; }
+    .footer-socials { gap: 1rem; }
+  }
+
+  /* Very small phones */
+  @media (max-width: 380px) {
+    .hero-name { font-size: 1.7rem; }
+    .container { padding: 0 1rem; }
+  }
+
+  /* ── CURSOR BLINK ── */
+  .cursor {
+    display: inline-block; width: 2px; height: 1.1em;
+    background: var(--accent2); vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* ── FADE IN ON SCROLL ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .5s, transform .5s; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">uzair.dev<span class="cursor"></span></a>
+  <ul class="nav-links">
+    <li><a href="#skills"><span>01.</span>Skills</a></li>
+    <li><a href="#projects"><span>02.</span>Projects</a></li>
+    <li><a href="#certifications"><span>03.</span>Certs</a></li>
+    <li><a href="#contact"><span>04.</span>Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#skills" onclick="closeMenu()"><span>01.</span>Skills</a>
+  <a href="#projects" onclick="closeMenu()"><span>02.</span>Projects</a>
+  <a href="#certifications" onclick="closeMenu()"><span>03.</span>Certs</a>
+  <a href="#contact" onclick="closeMenu()"><span>04.</span>Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <p class="hero-greeting">Hi, I'm</p>
+      <h1 class="hero-name">Muhammad Uzair<br />Arshad</h1>
+      <p class="hero-title">Full Stack Web Developer</p>
+      <p class="hero-desc">
+        A passionate developer based in Karachi, Pakistan — building real-world web applications across
+        E-Commerce, Travel Booking, Enterprise IT, and POS systems. Skilled in both frontend and backend,
+        currently advancing at Aptech Learning Institute.
+      </p>
+      <div class="hero-links">
+        <a class="btn btn-primary" href="#contact">Contact Me</a>
+        <a class="btn btn-outline" href="mailto:uzair005874@gmail.com">✉ uzair005874@gmail.com</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="stat-num">6+</span>
+          <span class="stat-label">Real-world projects</span>
+        </div>
+        <div>
+          <span class="stat-num">4+</span>
+          <span class="stat-label">Certifications</span>
+        </div>
+        <div>
+          <span class="stat-num">5+</span>
+          <span class="stat-label">Technologies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <h2 class="section-head reveal">My Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Frontend</div>
+        <div class="skill-tags">
+          <span class="tag">HTML5</span><span class="tag">CSS3</span>
+          <span class="tag">JavaScript</span><span class="tag">Bootstrap</span>
+          <span class="tag">jQuery</span><span class="tag">Angular</span>
+          <span class="tag">React (MUI)</span><span class="tag">GSAP</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Backend</div>
+        <div class="skill-tags">
+          <span class="tag">PHP</span><span class="tag">C#</span>
+          <span class="tag">ASP.NET MVC</span><span class="tag">.NET 10</span>
+          <span class="tag">REST APIs</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Database</div>
+        <div class="skill-tags">
+          <span class="tag">SQL Server</span><span class="tag">Entity Framework Core</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Other Tools</div>
+        <div class="skill-tags">
+          <span class="tag">Git</span><span class="tag">SEO</span>
+          <span class="tag">MS Office</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <h2 class="section-head reveal">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-icon">🛍️</div>
+        <div class="project-name">LUXE — E-Commerce Store</div>
+        <div class="project-desc">Luxury shopping platform with live cart, category filters, and an animated gallery. Zero-dependency build for maximum performance.</div>
+        <ul class="project-bullets">
+          <li>Live cart & category filters</li>
+          <li>Animated gallery experience</li>
+          <li>Zero-dependency, fast build</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span><span class="stack-tag">CSS</span><span class="stack-tag">JavaScript</span>
+        </div>
+        <a href="https://github.com/uzair23-hub/e-commerce" target="_blank" rel="noopener" class="gh-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-icon">✈️</div>
+        <div class="project-name">Travel Agency Booking System</div>
+        <div class="project-desc">Full travel booking platform with destination browsing, online reservations, and a secure admin dashboard with role management.</div>
+        <ul class="project-bullets">
+          <li>Destination browsing & reservations</li>
+          <li>User authentication system</li>
+          <li>Role-based admin dashboard</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">C#</span><span class="stack-tag">ASP.NET MVC</span><span class="stack-tag">Bootstrap</span>
+        </div>
+        <a href="https://github.com/uzair23-hub/travel-agency" target="_blank" rel="noopener" class="gh-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-icon">🏢</div>
+        <div class="project-name">Symphony Ltd — IT Management</div>
+        <div class="project-desc">Enterprise application with 18 database tables, role-based access, student results, GSAP animations, and session-based authentication.</div>
+        <ul class="project-bullets">
+          <li>18 DB tables, role-based access</li>
+          <li>Student results management</li>
+          <li>GSAP animations & session auth</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">.NET 10</span><span class="stack-tag">C#</span><span class="stack-tag">EF Core</span><span class="stack-tag">SQL Server</span>
+        </div>
+        <a href="https://github.com/uzair23-hub/it-managment-system" target="_blank" rel="noopener" class="gh-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-icon">🧾</div>
+        <div class="project-name">POS Pro — Point of Sale System</div>
+        <div class="project-desc">Clean dashboard with product management, inventory tracking, bill generation, and full transaction history.</div>
+        <ul class="project-bullets">
+          <li>Product & inventory management</li>
+          <li>Bill generation system</li>
+          <li>Full transaction history</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span><span class="stack-tag">CSS</span><span class="stack-tag">JavaScript</span><span class="stack-tag">PHP</span>
+        </div>
+        <a href="https://github.com/uzair23-hub/pos-pro" target="_blank" rel="noopener" class="gh-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-icon">⚙️</div>
+        <div class="project-name">Full-Stack ASP.NET MVC App</div>
+        <div class="project-desc">Layered architecture application with a fully responsive UI and scalable, maintainable codebase.</div>
+        <ul class="project-bullets">
+          <li>Clean layered architecture</li>
+          <li>Responsive UI</li>
+          <li>Scalable codebase</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">ASP.NET MVC</span><span class="stack-tag">JavaScript</span><span class="stack-tag">Bootstrap</span>
+        </div>
+        <a href="https://github.com/uzair23-hub/project-23" target="_blank" rel="noopener" class="gh-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-icon">✨</div>
+        <div class="project-name">Animated UI Frontend</div>
+        <div class="project-desc">A visually rich frontend project featuring animated components, jQuery interactivity, and a fully responsive layout.</div>
+        <ul class="project-bullets">
+          <li>Smooth GSAP-powered animations</li>
+          <li>jQuery interactivity</li>
+          <li>Fully responsive design</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span><span class="stack-tag">CSS</span><span class="stack-tag">JavaScript</span><span class="stack-tag">jQuery</span>
+        </div>
+        <a href="https://github.com/uzair23-hub/project24" target="_blank" rel="noopener" class="gh-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="container">
+    <h2 class="section-head reveal">Certifications & Training</h2>
+    <div class="certs-list">
+      <div class="cert-item reveal">
+        <div class="cert-dot" style="background: var(--accent);"></div>
+        <div>
+          <div class="cert-name">Claude Code Certification</div>
+          <div class="cert-issuer">Anthropic · 2026</div>
+        </div>
+      </div>
+      <div class="cert-item reveal">
+        <div class="cert-dot" style="background: var(--accent2);"></div>
+        <div>
+          <div class="cert-name">Web & App Development</div>
+          <div class="cert-issuer">Aptech Learning Institute · In Progress</div>
+        </div>
+      </div>
+      <div class="cert-item reveal">
+        <div class="cert-dot" style="background: var(--yellow);"></div>
+        <div>
+          <div class="cert-name">Shopify E-Commerce Course</div>
+          <div class="cert-issuer">SMIT · 5 Months</div>
+        </div>
+      </div>
+      <div class="cert-item reveal">
+        <div class="cert-dot" style="background: var(--purple);"></div>
+        <div>
+          <div class="cert-name">Certificate in IT (CIT)</div>
+          <div class="cert-issuer">Engineers & Doctors Institute · 3 Months</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <h2 class="section-head reveal" style="margin-top: 3rem;">Education</h2>
+    <div class="edu-items">
+      <div class="edu-card reveal">
+        <div class="edu-degree">Intermediate — Computer Science</div>
+        <div class="edu-school">BIEK Karachi</div>
+        <div class="edu-year">Expected 2026</div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-degree">Matriculation</div>
+        <div class="edu-school">BSEK Karachi</div>
+        <div class="edu-year">2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-head reveal">Get In Touch</h2>
+    <div class="contact-wrap reveal">
+      <p>Interested in working together or have a project in mind? Feel free to reach out — I'm always open to new opportunities and collaborations.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:uzair005874@gmail.com">✉ uzair005874@gmail.com</a>
+        <a class="btn btn-outline" href="tel:+923463742417">📞 +92 346 3742417</a>
+        <a class="btn btn-outline" href="https://www.linkedin.com/in/uzair-arshad-b53b862a0" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn btn-outline" href="https://github.com/uzair-arshad" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-socials">
+      <a href="https://www.linkedin.com/in/uzair-arshad-b53b862a0" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://github.com/uzair-arshad" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <a href="mailto:uzair005874@gmail.com" aria-label="Email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+      </a>
+    </div>
+    <p>Designed & Built by <span>Muhammad Uzair Arshad</span> · Karachi, Pakistan</p>
+  </div>
+</footer>
+
+<script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // Stagger children inside grids
+  document.querySelectorAll('.projects-grid, .skills-grid, .certs-list, .edu-items').forEach(grid => {
+    [...grid.children].forEach((child, i) => {
+      child.style.transitionDelay = `${i * 80}ms`;
+    });
+  });
+</script>
+</body>
+</html>
